@@ -46,7 +46,7 @@ p " using dig method"
 
 #dig Method
 =begin 
-useful for accessing nested data structures
+useful for accessing nested data structures. can find nil aswell
 obj.dig(*identifiers)
 =end
 
@@ -208,3 +208,4 @@ so we use the compact method at the end to remove the nil
 #we get the same result
 p vehicles.filter_map{|name, data| name if data[:year] >= 2020}
 #=>[:blake, :dave]
+
