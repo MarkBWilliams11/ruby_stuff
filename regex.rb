@@ -74,29 +74,4 @@ p t = Time.new(2008, 7, 4) #=> 2008-07-04 00:00:00 -0400
 p t.monday? #=> false
 p t.friday? #=> true
 
-p "Variables as pointers"
 
-=begin 
-Variables are pointers to physical space in memory.or labels to refer to 
-some physical memory address in computer
-=end
-a = "hi there"
-b = a
-a = "not here"
-p b #=> "hi there"
-
-a = "hi there"
-b = a
-a << ", Bob" #=> mutated caller with shovel <<
-p b #=> "hi there, Bob"
-
-#Note: mutating caller effects arrays and hashes aswell
-def test(b)
-  b.map {|letter| "I like the letter: #{letter}"}
-end
-
-a = ['a', 'b', 'c']
-p test(a)
-#Note: using bang opertator(depending on the condition) may or may not mutate caller
-
-p "Blocks and Procs"
