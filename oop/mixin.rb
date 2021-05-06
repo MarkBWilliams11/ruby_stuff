@@ -31,3 +31,52 @@ jiminy = Cricket.new("Jiminy")
 
 peter.jump
 jiminy.jump
+
+#Another Example
+module Speak
+  def speak(sound)
+    puts sound
+  end
+end
+
+class GoodDog
+  include Speak
+end
+
+class HumanBeing
+  include Speak
+end
+
+sparky = GoodDog.new
+sparky.speak("Arf!")        # => Arf!
+bob = HumanBeing.new
+bob.speak("Hello!")         # => Hello!
+
+#one other one
+module Run
+  def runFast
+    puts "runs really fast"
+  end  
+  def runSlow
+    puts "runs really slow"
+  end  
+end
+class Fast
+  include Run
+   def initialize(name)
+    @name
+   end
+end  
+class Slow
+  include Run
+   def initialize(name)
+    @name
+   end
+   
+end  
+
+p rabbit = Fast.new("rabbit")
+p turtle = Fast.new("turtle")
+
+rabbit.runFast
+turtle.runSlow

@@ -28,4 +28,6 @@ if we want both read and write a particular variable
     @job = job
   end
 end
+
+#shouldnt make anything readable or writable without good reason.
 =end

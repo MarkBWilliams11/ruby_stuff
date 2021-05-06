@@ -18,7 +18,8 @@ end
 
 =begin 
 A Ruby class is used to organize and model objects with 
-similar attributes and methods.
+similar attributes and methods. Outline of what a object should be made of
+and wht it should be able to to
 
 Basic classs syntax:
 
@@ -46,8 +47,8 @@ class NewClass
   end  
 end  
 
--creating the instance of class by calling new to the class name
+-creating a variable or the instance of class, by calling (new) to the class name
 variable= NewClass.new("anna")
-
+#call this instantiation
 
 =end
