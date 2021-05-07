@@ -52,3 +52,4 @@ variable= NewClass.new("anna")
 #call this instantiation
 
 =end
+#http://ruby.bastardsbook.com/chapters/oops/ apply later

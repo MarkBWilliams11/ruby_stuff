@@ -19,21 +19,35 @@ What about making an army   of vikings  that do stuff eat,sleep,stravel,attack
 =end
 #begin
 p 1.class #=> Integer
-
-class Viking 
-  #Class Varaibles @@variable owned to the class itself
-  @@starting_health = 100 #=> assume they start at the same health
-  #away of offering getter and setter
-  attr_accessor :name, :age, :health, :strength
-                #params to be initialized
-  def initialize(name,age,strength)
-
-        #instance variable @variable_name part of setting up object state
+class Person #Viking class will inhert from the class
+  def initialize(name,age,strength,dead)
     @name = name
     @age = age
-    @health = @@starting_health
     @strength = strength
+    @dead = false
+  end
+end
+
+    #now Vikings has access to the characteritics and behaviours of Person class
+class Viking < Person
+  #Class Varaibles @@variable owned to the class itself
+  @@starting_health = 120 #=> assume they start at the same health
+  #away of offering getter and setter & 
+  attr_accessor :name, :age, :health, :strength,:dead
+                #params to be initialized stes us up to use them
+  def initialize(name,age,strength,dead, weapon)
+#inheriting attr from the person (parent or superclass)
+    super(name,age,strength,dead)
+        #instance variable @variable_name part of setting up object state
+    #@name = name
+    #@age = age
+    @health = @@starting_health
+    #@strength = strength
+    @wepaon = weapon 
+  
   end  
+
+
 
 #we can define the class method by its name with "self" ( def self.class_method)
 #or the name itself def Viking.class_method
@@ -42,7 +56,9 @@ class Viking
     age = rand * 20 + 15 #rando is integer random 0-1
     health = [age * 5, 120].min
     strength = [age /2 ,10].min
-    Viking.new(name,age,strength)
+    weapon =["Sword","Axe","Club"].sample
+    dead= false
+    Viking.new(name,age,strength,dead,weapon)
   end 
 
   def self.random_name# useful to make random warrior
@@ -61,7 +77,12 @@ end#=> class << self end
   #instance method individual method within class
   #if we have two Viking and one attacks
   def attack(enemy)
-    
+    if enemy.dead
+      puts "#{enemy.name} is already dead"
+      return false
+    end
+    damage =(rand * 10 + 10).round(0) #=> random number 
+    enemy.take_damage(damage) #=> eneny takes damage using random damge
   end
 
 =begin  
@@ -81,38 +102,79 @@ equal sign and taking an arguement, setting the vairble itself
   end  
 =end
 
-=begin
-Now that we have getter and setter(attr_accessor) we have two ways of calling instance varible
-normally using @anme  or calling the method on the instance using "self"
-which represents the object called
-=end
-
-  def take_damage(damage)
-    self.health-=damage
-    #or @health -= damage
-    self.shout("Ouch!")
-  end  
-
-  def shout(string)
-    puts string
-  end
 
 =begin 
-
   def sleep
       health += 1 unless>=99
   end
-  
-  Here ruby assumes health variable using #health= instead of accessing the one 
-  that currrently  exists as @health. an edge case to look out for
-    if start eliminating self
+Here ruby assumes health variable using #health= instead of accessing the one 
+that currrently  exists as @health. an edge case to look out for
+if start eliminating self
 =end
 def heal
     2.times{super}#or self.helth = [self.helth + 2, MAX_HEALTH].min
     "Ready for Battle!"
   end 
 
-end 
+
+
+#scope
+=begin 
+Scope is the formal term that represents when can/cannot access a variable
+or method. unless brought in the scope can not recognize it
+
+New scope is created when you first define a variable.That varible
+is then accessible by anything within scope untilo scope exit.
+=end  
+def launch_longships(longships) 
+    #new scope
+launch_longships = 0 #< we can use launch_ships here cause its within a new scope
+
+longships.each {|longship|
+  #new scope
+  longship_name = "#{longship.owner.name}'s Reaver"
+
+  longship.launch
+  launched_ships+=1
+  puts "#{longship_name} successfully launched"
+
+}
+#Now we exited the loop no long have access to longship or longship_name
+#launched_ships is within scope
+puts "We launched #{launched_ships} ships!"
+end
+
+
+protected # similar privacy to private, but lets the methods inside other instances of the samae class
+
+=begin
+Now that we have getter and setter(attr_accessor) we have two ways of calling instance varible
+normally using @name  or calling the method on the instance using "self"
+which represents the object called
+=end
+
+  def take_damage(damage)
+    self.health-=damage
+    #or @health -= damage
+    self.shout("Ouch! #{self.name} took #{damage} and has #{self.health} left" )
+    die if self.health<=0
+
+  end  
+
+  def shout(string)
+    puts string
+  end
+
+
+  private #only accessiable by other methods in class
+          #can access attr_accessor
+  def die
+    puts "#{self.name} has been killed "
+    self.dead= true 
+  end  
+  
+
+end #=>Viking class end
 
 #instantiating a (new)
 #new is a class method that allows us to call on a class(array)
@@ -120,19 +182,24 @@ end
 #this sets up the class to get ready to be used
 
 
-p ragnar = Viking.new("Ragnar",25,15)
-p oleg = Viking.new("Oleg",29,18)
+#p ragnar = Viking.new("Ragnar",25,15,"Axe")
+#p oleg = Viking.new("Oleg",29,18,"Bow")
 
-p ragnar.attack(oleg) #=> 97
-oleg.take_damage(10)
-p oleg.inspect#=> only string show different
+#p ragnar.attack(oleg) #=> 97
+#oleg.take_damage(10)
+#p oleg.inspect#=> only string show different
 
-brek= Viking.create_warrior("Brek")
-p brek
+#brek= Viking.create_warrior("Brek")
+#p brek
 
 #random warrior
 warrior1 = Viking.create_warrior(Viking.random_name)
 p warrior1
+warrior2 = Viking.create_warrior(Viking.random_name)
+p warrior2
+
+#warrior1.die
+p 10.times{ warrior1.attack(warrior2)}
 
 
 
