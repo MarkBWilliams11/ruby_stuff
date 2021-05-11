@@ -1,8 +1,7 @@
-#extend
-=begin 
-The extend keyword mixes a moudles methods at the class level
-giving to class access the methods, as opposed to the instances of the class
-=end
+# extend
+#
+# The extend keyword mixes a moudles methods at the class level
+# giving to class access the methods, as opposed to the instances of the class
 
 # ThePresent has a .now method that we'll extend to TheHereAnd
 

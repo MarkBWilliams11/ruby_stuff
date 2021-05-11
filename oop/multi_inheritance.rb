@@ -1,16 +1,12 @@
-=begin 
-Using mixins to imitate multiple inheritance, giving traits from modules
-as needed, we can add an combination
-=end
+#
+# Using mixins to imitate multiple inheritance, giving traits from modules
+# as needed, we can add an combination
 
 module MartialArts
   def swordsman
     puts "I'm a swordsman."
   end
 end
-
-
-
 
 class Ninja
   include MartialArts
@@ -26,6 +22,6 @@ class Samurai
   end
 end
 
-igi=Samurai.new("Igi")
+igi = Samurai.new('Igi')
 
 igi.swordsman #=> "I'm a swordsman"

@@ -8,16 +8,15 @@ class Computer
   end
 
   def create(filename)
-    time=Time.now
-    @files[filename]=time
+    time = Time.now
+    @files[filename] = time
     puts "The new file was created:#{@files}"
   end
 
-  def Computer.get_users
-    return @@users
+  def self.get_users
+    @@users
   end
-  
 end
 
-p my_computer = Computer.new("Mac",123)
- my_computer.create("text.txt")
+p my_computer = Computer.new('Mac', 123)
+my_computer.create('text.txt')
