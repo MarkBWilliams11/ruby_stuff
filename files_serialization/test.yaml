@@ -1,0 +1,18 @@
+squad_name: "Mac"
+members:
+  "Mac":
+    rank: 100
+    skill: 100
+  "Anna":
+    rank: 80
+    skill: 60
+  "Bob":
+    rank: 70
+    skill: 50
+maps:
+  - tidi
+  - ryusho island
+  - tuyoshi castle
+
+  # (:) the colons respresent "key-value" pairings that create a new hash
+  # (-) represents that we want a list rather than a hash
